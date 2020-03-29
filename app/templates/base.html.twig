@@ -11,14 +11,13 @@
     </head>
     <body>
         <div class="container">
-            {{ dump(app.request.attributes.get('_route')) }}
             <h2>WeeTeam Test Task</h2>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link {%  if currentPath == path('index') %}active {% endif %}" href="{{ path('index')}}">Active</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {%  if currentPath == path('add_dossier') %}active {% endif %}" href="{{ path('add_dossier') }}">Add</a>
+                    <a class="nav-link {%  if currentPath == path('crud_dossier') %}active {% endif %}" href="{{ path('crud_dossier') }}">Add</a>
                 </li>
             </ul>
 

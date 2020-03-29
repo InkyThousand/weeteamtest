@@ -56,19 +56,24 @@ class DossierController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="edit_dossier", options={ "method_prefix" = false })
+     * @Route("/edit/{id}", name="crud_dossier", options={ "method_prefix" = false })
      * @param $id
      * @param Request $request
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction($id, Request $request)
+    public function crudAction($id = null, Request $request)
     {
-        $dossier = $this->dossierRepository->find($id);
+        if(!empty($id)){
+            $dossier = $this->dossierRepository->find($id);
+        } else {
+            $dossier = new Dossier();
+        }
+
         $form = $this->createForm(DossierType::class, $dossier);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             $this->entityManager->persist($dossier);
             $this->entityManager->flush();
 
@@ -80,31 +85,6 @@ class DossierController extends AbstractController
             ['form' => $form->createView()]
         );
 
-    }
-
-    /**
-     * @Route("/add", name="add_dossier", options={ "method_prefix" = false })
-     * @param Request $request
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function addAction(Request $request)
-    {
-        $dossier = new Dossier();
-        $form = $this->createForm(DossierType::class, $dossier);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted()){
-            $this->entityManager->persist($dossier);
-            $this->entityManager->flush();
-
-            return new RedirectResponse($this->router->generate('index'));
-        }
-
-        return $this->render(
-            'crud.html.twig',
-            ['form' => $form->createView()]
-        );
     }
 
     /**

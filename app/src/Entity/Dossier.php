@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DossierRepository")
@@ -42,12 +43,16 @@ class Dossier
     private $address;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="bigint", nullable=true)
+     * @Assert\Positive
+     * @Assert\Length(max=16, min=16)
      */
     private $creditCard;
 
     /**
-     * @ORM\Column(type="decimal", precision=4, scale=0, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
+     * @Assert\Length(max=4, min=4)
      */
     private $cvvCard;
 

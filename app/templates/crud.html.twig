@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% if currentRoute == 'add_dossier' %}Add dossier{% else %}Edit dossier {% endif %}{% endblock %}
+{% block title %}Add/Edit dossier{% endblock %}
 
 {% block body %}
     <br>
-    <h2>{% if currentRoute == 'add_dossier' %}Add dossier{% else %}Edit dossier {% endif %}</h2>
+    <h2>Add/Edit dossier</h2>
 
     {{ form_start(form) }}
 
