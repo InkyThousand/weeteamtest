@@ -1,3 +1,5 @@
+{% set currentRoute = app.request.attributes.get('_route') %}
+{% set currentPath = path(currentRoute, app.request.attributes.get('_route_params')) %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,6 +11,17 @@
     </head>
     <body>
         <div class="container">
+            {{ dump(app.request.attributes.get('_route')) }}
+            <h2>WeeTeam Test Task</h2>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {%  if currentPath == path('index') %}active {% endif %}" href="{{ path('index')}}">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {%  if currentPath == path('add_dossier') %}active {% endif %}" href="{{ path('add_dossier') }}">Add</a>
+                </li>
+            </ul>
+
             {% block body %}{% endblock %}
             {% block javascripts %}
                 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
